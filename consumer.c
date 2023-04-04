@@ -1,8 +1,8 @@
 #include "buffer.h"
 
-struct buff *shtab;
+struct buff *shtab; // Shared Memory //
 
-int out = 0;
+int out = 0; // Slot consuming from //
 
 void* consumer(void* thd)
 {
@@ -39,8 +39,6 @@ int main()
 	pthread_t thread_id;
 	pthread_create(&thread_id, NULL, consumer, NULL);
 	pthread_join(thread_id, NULL);
-	
-	//sem_post(&shtab->s4);
 
 	return 0;
 }

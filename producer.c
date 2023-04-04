@@ -2,9 +2,9 @@
 #include <time.h>
 #include "buffer.h"
 
-struct buff *shtab;
+struct buff *shtab; // Shared Memory //
 
-int in = 0;
+int in = 0; // Slot producing to //
 
 void* producer(void* thd)
 {
@@ -45,15 +45,10 @@ int main()
 	sem_init(&shtab->full, 1, 0); 
 	sem_init(&shtab->empty, 1, 1);
 	
-	//sem_init(&shtab->s4, 1, 0);
-	
 	// Create Threads //
 	pthread_t thread_id;
 	pthread_create(&thread_id, NULL, producer, NULL);
 	pthread_join(thread_id, NULL);
-	
-	//sem_wait(&shtab->s4);
-	//shm_unlink("queue");
 
 	return 0;
 }
